@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, Dimensions, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, Dimensions, TouchableOpacity, FlatList, TextInput } from 'react-native';
+import Footer from "../components/Footer";
 import Header from '../components/Header';
 
 const w = Dimensions.get('window').width;
@@ -86,37 +87,58 @@ const leveldata = [
 const textdata = [
     {
         title: "Your Security Solution",
-        img:require('../assets/5g.png'),
+        img: require('../assets/main3.png'),
         pts: [
-            { pt: "Mollis Ornare Pretium" },
-            { pt: "Aenean Pretium" },
-            { pt: "Donec Convallis Metus" },
-            { pt: "Integer Volutpat" },
-            { pt: "Quis Euismod Pharetra" },
+            { pt: "We provide you with optional Two-Factor or Three Factor Authentication using Yubikey, which protects you from SIM fraud and hacking" },
+            { pt: "We don’t sell or share your data" },
+            { pt: "We have sitewide SSL configuration and sophisticated cloud infrastructure for the highest security possible" },
         ],
     },
     {
-        level: "Level 2",
-        cost: "$25",
-        month: "Per month / per user",
-        data: "10 GB",
-        time: "10 MIN",
-        sms: "10 SMS",
+        title: "Nationwide Coverage & Fast Connectivity",
+        img: require('../assets/main4.png'),
         pts: [
-            { pt: "Mollis Ornare Pretium" },
-            { pt: "Aenean Pretium" },
-            { pt: "Donec Convallis Metus" },
-            { pt: "Integer Volutpat" },
-            { pt: "Quis Euismod Pharetra" },
+            { pt: "99% US coverage for your calls, data, and texts" },
+            { pt: "GoTalk uses the largest and fastest 5G network in America" },
+            { pt: "We offer 5G Ultra Capacity - have speed as fast as WiFi on your phone" },
         ],
     },
-  
+
 ]
+
+const realstories = [
+    {
+        title: "Andrew Life",
+        position: "Vice President, GoPro",
+        infoImage: require('../assets/airbnb.png'),
+        comment: "Favorable rates at minimal prices - what I was looking for. Thank you for such a reliable connection. I bought SIM cards for the whole..."
+    },
+    {
+        title: "Kristin Watson",
+        position: "Vice President, GoPro",
+        infoImage: require('../assets/bookmyshow.png'),
+        comment: "Landify saved our time in designing my company page",
+    },
+    {
+        title: "Floyd Miles",
+        position: "Vice President, GoPro",
+        infoImage: require('../assets/hubspot.png'),
+        comment: "To quickly start my startup landing page design. I was looking for a landing page UI Kit. Landify is one of the best landing page UI kit I have come across. It’s so flexible, well organised and easily editable. To quickly start my startup landing page design. I was looking for a landing page UI Kit. Landify is one of",
+    },
+    {
+        title: "Kristin Watson",
+        position: "Vice President, GoPro",
+        infoImage: require('../assets/bookmyshow.png'),
+        comment: "Landify saved our time in designing my company page",
+    }
+];
 
 const Home = ({ navigation }) => {
 
     const [selectindex, setSelectindex] = useState(0)
-    const [levelindex, setLevelindex] = useState(0)
+    const [levelindex, setLevelindex] = useState(0);
+    const [fulltxtindex, setFulltxtindex] = useState(null);
+    const [zipcode, setZipcode] = useState("")
     return (
         <SafeAreaView style={styles.container}>
             <Header navigation={navigation} />
@@ -317,7 +339,125 @@ const Home = ({ navigation }) => {
                         style={styles.imgstyle}
                     />
                 </TouchableOpacity>
-
+                <View style={{ marginHorizontal: 25 }}>
+                    <FlatList
+                        data={textdata}
+                        renderItem={({ item, index }) => {
+                            return (
+                                <View>
+                                    <Text style={[styles.poptxt, { textAlign: 'left', paddingTop: 15, paddingBottom: 25 }]}>
+                                        {item.title}
+                                    </Text>
+                                    <View style={{}}>
+                                        {item.pts.map((pt, idx) => {
+                                            return (
+                                                <View style={{ flexDirection: 'row', alignSelf: 'flex-start', alignItems: 'flex-start' }}>
+                                                    <View style={{ height: 4, width: 4, borderRadius: 2, backgroundColor: '#D75F5C', marginRight: 5, marginTop: 10 }}>
+                                                    </View>
+                                                    <Text style={[styles.pttxt, { color: '#000', textAlign: 'left', }]}>
+                                                        {pt.pt}
+                                                    </Text>
+                                                </View>
+                                            )
+                                        })}
+                                    </View>
+                                    <View style={{ height: 342, width: '100%', borderRadius: 50, marginTop: 20 }}>
+                                        <Image
+                                            source={item.img}
+                                            style={{ height: 340, width: '100%', borderRadius: 50 }}
+                                        />
+                                    </View>
+                                    {index == 0 ?
+                                        <View style={{ height: 1, width: '100%', backgroundColor: '#D75F5C', marginTop: 25 }}>
+                                        </View>
+                                        : null}
+                                </View>
+                            )
+                        }}
+                    />
+                </View>
+                <View style={{ width: w, backgroundColor: '#051431', marginTop: 20, marginBottom: 30, paddingBottom: 30 }}>
+                    <View style={{ paddingHorizontal: 25 }}>
+                        <Text style={[styles.poptxt, { color: '#fff', paddingHorizontal: 40 }]}>
+                            Real stories from Real Customers
+                        </Text>
+                        <FlatList
+                            data={realstories}
+                            renderItem={({ item, index }) => {
+                                return (
+                                    <View style={{ paddingHorizontal: 10, backgroundColor: '#fff', borderRadius: 9, marginTop: 25, paddingVertical: 15, paddingHorizontal: 20 }}>
+                                        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+                                            <Image
+                                                source={item.infoImage}
+                                                style={{ height: 40, width: 128, resizeMode: 'contain' }}
+                                            />
+                                            {item.comment.length > 120 && fulltxtindex != index ?
+                                                <TouchableOpacity
+                                                    onPress={() => {
+                                                        setFulltxtindex(index)
+                                                    }}
+                                                >
+                                                    <Image
+                                                        source={require('../assets/downarrow.png')}
+                                                        style={{ height: 10, width: 15 }}
+                                                    />
+                                                </TouchableOpacity>
+                                                : fulltxtindex == index ?
+                                                    <TouchableOpacity
+                                                        onPress={() => {
+                                                            setFulltxtindex(null)
+                                                        }}
+                                                    >
+                                                        <Image
+                                                            source={require('../assets/uparrow.png')}
+                                                            style={{ height: 10, width: 15 }}
+                                                        />
+                                                    </TouchableOpacity>
+                                                    : null
+                                            }
+                                        </View>
+                                        {fulltxtindex == index ?
+                                            <Text style={styles.tariftxt}>
+                                                {item.comment}
+                                            </Text>
+                                            :
+                                            <Text numberOfLines={4} style={styles.tariftxt}>
+                                                {item.comment}
+                                            </Text>
+                                        }
+                                        <Text style={[styles.txtstyle, { textAlign: 'left', marginTop: 30 }]}>
+                                            {item.title}
+                                        </Text>
+                                        <Text style={[styles.numsim, { textAlign: 'left' }]}>
+                                            {item.position}
+                                        </Text>
+                                    </View>
+                                )
+                            }}
+                        />
+                    </View>
+                </View>
+                <View style={{ paddingHorizontal: 25 }}>
+                    <Text style={{ color: '#051431', fontSize: 36, lineHeight: 44, textAlign: 'center', paddingBottom: 20 }}>
+                        Check Coverage in your area
+                    </Text>
+                    <Text style={[styles.tariftxt, { textAlign: 'center' }]}>
+                        Enter your ZIP code to see coverage in your area
+                    </Text>
+                    <TextInput
+                        placeholder="ZIP Code"
+                        style={{ backgroundColor: '#E5E5E5', borderColor: '#DCDCE4', borderWidth: 1, padding: 10, borderRadius: 10, marginVertical: 20,color:'#000',opacity:0.7 }}
+                        value={zipcode}
+                        onChangeText={(text) => setZipcode(text)}
+                        maxLength={6}
+                    />
+                    <TouchableOpacity style={{ height: 40, width: '100%', borderRadius: 30, backgroundColor: '#D75F5C', alignItems: 'center', justifyContent: 'center', marginTop: 15,marginBottom:30 }}>
+                        <Text style={{ fontSize: 16, fontWeight: '700', color: '#fff' }}>
+                            SUBMIT
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+                <Footer navigation={navigation}/>
             </ScrollView>
         </SafeAreaView>
     )
@@ -360,6 +500,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '400',
         lineHeight: 32,
+        color: '#000',
     },
     popview: {
         borderRadius: 25,
