@@ -110,18 +110,14 @@
 // });
 
 // export default App;
-
-import 'react-native-gesture-handler'
+import 'react-native-gesture-handler';
 import React from "react";
 import MainStack from './src/navigation/MainStack'
 import { NavigationContainer } from "@react-navigation/native";
-import DrawerNavigator from './src/navigation/MainStack';
-
 const App = () => {
   return (
     <NavigationContainer>
-     {/* <MainStack /> */}
-     <DrawerNavigator />
+     <MainStack />
     </NavigationContainer>
   )
 }

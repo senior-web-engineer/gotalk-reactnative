@@ -10,7 +10,6 @@ const Header = ({ title, navigation }) => {
             <View style={styles.container}>
                 <View style={{flexDirection:'row',alignItems:'center'}}>
                 <TouchableOpacity
-                // onPress={() => navigation.goBack()}
                 onPress={() => navigation.openDrawer()}
                 >
                     <Image source={require('../assets/menu.png')} style={{ marginRight: 15,height:20,width:25 }} />
@@ -20,9 +19,7 @@ const Header = ({ title, navigation }) => {
                     <Image source={require('../assets/logo.png')} style={{ padding: 10,height:30,width:82 }} />
                 </View>
                 </View>
-                <TouchableOpacity
-                onPress={()=>navigation.navigate('PersonalAccount')}
-                >
+                <TouchableOpacity>
                 <Image source={require('../assets/bag.png')} style={{ height:24,width:20 }} />
                 </TouchableOpacity>
             </View >
