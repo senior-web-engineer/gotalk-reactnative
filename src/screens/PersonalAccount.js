@@ -53,7 +53,10 @@ const PersonalAccount = ({ navigation }) => {
             <Header navigation={navigation} />
             <ScrollView>
                 <View style={styles.subcontainer}>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TouchableOpacity
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                        onPress={() => navigation.goBack()}
+                    >
                         <Image
                             source={require('../assets/leftarrow.png')}
                             style={{ height: 15, width: 15, resizeMode: 'contain', marginRight: 10 }}
@@ -65,21 +68,21 @@ const PersonalAccount = ({ navigation }) => {
                     <Text style={styles.title}>
                         Personal account
                     </Text>
-                    <View style={{flexDirection:'row',alignItems:'center'}}>
-                    <TextInput
-                        placeholder="+1 999-999-9999"
-                        style={{ backgroundColor: '#E5E5E5', borderColor: '#DCDCE4', borderWidth: 1, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 10, marginVertical: 20, color: '#000', opacity: 0.7,width:w-30 }}
-                        value={mobile}
-                        onChangeText={(text) => setMobile(text)}
-                        maxLength={13}
-                        keyboardType={'phone-pad'}
-                    />
-                    <View style={{position:'absolute',right:20}}>
-                    <Image 
-                    source={require('../assets/downarrow.png')}
-                    style={{height:10,width:15,resizeMode:'contain'}}
-                    />
-                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <TextInput
+                            placeholder="+1 999-999-9999"
+                            style={{ backgroundColor: '#E5E5E5', borderColor: '#DCDCE4', borderWidth: 1, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 10, marginVertical: 20, color: '#000', opacity: 0.7, width: w - 30 }}
+                            value={mobile}
+                            onChangeText={(text) => setMobile(text)}
+                            maxLength={13}
+                            keyboardType={'phone-pad'}
+                        />
+                        <View style={{ position: 'absolute', right: 20 }}>
+                            <Image
+                                source={require('../assets/downarrow.png')}
+                                style={{ height: 10, width: 15, resizeMode: 'contain' }}
+                            />
+                        </View>
                     </View>
                     <View style={styles.levelview}>
                         <Text style={styles.mobiletxt}>
